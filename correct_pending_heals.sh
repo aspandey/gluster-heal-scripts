@@ -8,29 +8,32 @@
 # of those files present in this file (heal).
 #
 
+function desc ()
+{
+echo ""
+echo "This script finally resets the xattrs of all the fragments of a file
+which can be healed as per gfid_needing_heal_parallel.sh.
+gfid_needing_heal_parallel.sh will produce two files, heal and noheal.
+This script takes heal as input and resets xattrs of all the fragments
+of those files present in this file (heal)."
+}
+
 
 function _init ()
 {
     if [ $# -ne 1 ]
     then
-        echo "usage: $0 heal";
-        echo "This script finally resets the xattrs of all the fragments of a file
-which can be healed as per gfid_needing_heal_parallel.sh.
-gfid_needing_heal_parallel.sh will produce two files, heal and noheal.
-This script takes heal as input and resets xattrs of all the fragments
-of those files present in this file (heal)."
-        exit 2;
+        echo "usage: $0 heal"
+        desc
+        exit 2
+    elif [ "$1" = "--help" ]
+    then
+        desc
+        exit 2
     else
-        echo "This script finally resets the xattrs of all the fragments of a file
-              which can be healed as per gfid_needing_heal_parallel.sh.
-              gfid_needing_heal_parallel.sh will produce two files, heal and noheal.
-              This script takes heal as input and resets xattrs of all the fragments
-              of those files present in this file (heal)."
-    fi  
-
-    heal=$1;
+        heal=$1
+    fi
 }
-
 
 function total_file_size_in_hex()
 {
